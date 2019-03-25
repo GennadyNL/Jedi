@@ -1,0 +1,345 @@
+{
+    "item":  [
+                 {
+                     "name":  "Create Gist",
+                     "event":  [
+                                   {
+                                       "listen":  "test",
+                                       "script":  {
+                                                      "id":  "82e9928c-3124-4d3d-8306-5e3b1f45dfdd",
+                                                      "exec":  [
+                                                                   "var jsonData = JSON.parse(responseBody);",
+                                                                   "postman.setGlobalVariable(\"createdGistID\", jsonData.id);",
+                                                                   "tests[\"Status code is 201: Created\"] = responseCode.code === 201;",
+                                                                   "tests[\"Response time is acceptable (2s)\"] = responseTime \u003c 2000;",
+                                                                   "tests[\"Content-Type header is set\"] = postman.getResponseHeader(\"Content-Type\");"
+                                                               ],
+                                                      "type":  "text/javascript"
+                                                  }
+                                   }
+                               ],
+                     "request":  {
+                                     "method":  "POST",
+                                     "header":  [
+
+                                                ],
+                                     "body":  {
+                                                  "raw":  "{\"description\": \"JedQA\", \"public\": false,  \"files\": {  \"hello_jed.lix\": {   \"content\": \"Test Data for JedQA\"}}}",
+                                                  "mode":  "raw"
+                                              },
+                                     "url":  {
+                                                 "raw":  "{{baseURL}}",
+                                                 "host":  "{{baseURL}}"
+                                             },
+                                     "description":  ""
+                                 },
+                     "response":  [
+
+                                  ]
+                 },
+                 {
+                     "name":  "Read: Get Gist List",
+                     "event":  [
+                                   {
+                                       "listen":  "test",
+                                       "script":  {
+                                                      "id":  "82e9928c-3124-4d3d-8306-5e3b1f45dfdd",
+                                                      "exec":  [
+                                                                   "var jsonData = JSON.parse(responseBody);",
+                                                                   "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                                                                   "tests[\"Response time is acceptable (2s)\"] = responseTime \u003c 2000;",
+                                                                   "tests[\"Content-Type header is set\"] = postman.getResponseHeader(\"Content-Type\");"
+                                                               ],
+                                                      "type":  "text/javascript"
+                                                  }
+                                   }
+                               ],
+                     "request":  {
+                                     "method":  "GET",
+                                     "header":  [
+
+                                                ],
+                                     "body":  {
+                                                  "raw":  "",
+                                                  "mode":  "raw"
+                                              },
+                                     "url":  {
+                                                 "raw":  "{{baseURL}}",
+                                                 "host":  "{{baseURL}}"
+                                             },
+                                     "description":  ""
+                                 },
+                     "response":  [
+
+                                  ]
+                 },
+                 {
+                     "name":  "Read: Get Starred Gists",
+                     "event":  [
+                                   {
+                                       "listen":  "test",
+                                       "script":  {
+                                                      "id":  "82e9928c-3124-4d3d-8306-5e3b1f45dfdd",
+                                                      "exec":  [
+                                                                   "var jsonData = JSON.parse(responseBody);",
+                                                                   "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                                                                   "tests[\"Response time is acceptable (2s)\"] = responseTime \u003c 2000;",
+                                                                   "tests[\"Content-Type header is set\"] = postman.getResponseHeader(\"Content-Type\");"
+                                                               ],
+                                                      "type":  "text/javascript"
+                                                  }
+                                   }
+                               ],
+                     "request":  {
+                                     "method":  "GET",
+                                     "header":  [
+
+                                                ],
+                                     "body":  {
+                                                  "raw":  "",
+                                                  "mode":  "raw"
+                                              },
+                                     "url":  {
+                                                 "raw":  "{{baseURL}}/starred",
+                                                 "host":  "{{baseURL}}",
+                                                 "path":  "starred"
+                                             },
+                                     "description":  ""
+                                 },
+                     "response":  [
+
+                                  ]
+                 },
+                 {
+                     "name":  "Update : Star Gist",
+                     "event":  [
+                                   {
+                                       "listen":  "test",
+                                       "script":  {
+                                                      "id":  "82e9928c-3124-4d3d-8306-5e3b1f45dfdd",
+                                                      "exec":  [
+                                                                   "tests[\"Status code is 204: No Content\"] = responseCode.code === 204;",
+                                                                   "tests[\"Response time is acceptable (1s)\"] = responseTime \u003c 1000;",
+                                                                   "tests[\"Content-Type header is set\"] = postman.getResponseHeader(\"Content-Type\");"
+                                                               ],
+                                                      "type":  "text/javascript"
+                                                  }
+                                   }
+                               ],
+                     "request":  {
+                                     "method":  "PUT",
+                                     "header":  [
+
+                                                ],
+                                     "body":  {
+                                                  "raw":  "",
+                                                  "mode":  "raw"
+                                              },
+                                     "url":  {
+                                                 "raw":  "{{baseURL}}/{{createdGistID}}/star",
+                                                 "host":  "{{baseURL}}",
+                                                 "path":  [
+                                                              "{{createdGistID}}",
+                                                              "star"
+                                                          ]
+                                             },
+                                     "description":  ""
+                                 },
+                     "response":  [
+
+                                  ]
+                 },
+                 {
+                     "name":  "Read: Is Gist Starred",
+                     "event":  [
+                                   {
+                                       "listen":  "test",
+                                       "script":  {
+                                                      "id":  "82e9928c-3124-4d3d-8306-5e3b1f45dfdd",
+                                                      "exec":  [
+                                                                   "tests[\"Status code is 204\"] = responseCode.code === 204;",
+                                                                   "tests[\"Response time is acceptable (1s)\"] = responseTime \u003c 1000;",
+                                                                   "tests[\"Content-Type header is set\"] = postman.getResponseHeader(\"Content-Type\");"
+                                                               ],
+                                                      "type":  "text/javascript"
+                                                  }
+                                   }
+                               ],
+                     "request":  {
+                                     "method":  "GET",
+                                     "header":  [
+
+                                                ],
+                                     "body":  {
+                                                  "raw":  "",
+                                                  "mode":  "raw"
+                                              },
+                                     "url":  {
+                                                 "raw":  "{{baseURL}}/{{createdGistID}}/star",
+                                                 "host":  "{{baseURL}}",
+                                                 "path":  [
+                                                              "{{createdGistID}}",
+                                                              "star"
+                                                          ]
+                                             },
+                                     "description":  ""
+                                 },
+                     "response":  [
+
+                                  ]
+                 },
+                 {
+                     "name":  "Update: Unstar Gist",
+                     "event":  [
+                                   {
+                                       "listen":  "test",
+                                       "script":  {
+                                                      "id":  "82e9928c-3124-4d3d-8306-5e3b1f45dfdd",
+                                                      "exec":  [
+                                                                   "tests[\"Status code is 204: No Content\"] = responseCode.code === 204;",
+                                                                   "tests[\"Response time is acceptable (1s)\"] = responseTime \u003c 1000;",
+                                                                   "tests[\"Content-Type header is set\"] = postman.getResponseHeader(\"Content-Type\");"
+                                                               ],
+                                                      "type":  "text/javascript"
+                                                  }
+                                   }
+                               ],
+                     "request":  {
+                                     "method":  "DELETE",
+                                     "header":  [
+
+                                                ],
+                                     "body":  {
+                                                  "raw":  "",
+                                                  "mode":  "raw"
+                                              },
+                                     "url":  {
+                                                 "raw":  "{{baseURL}}/{{createdGistID}}/star",
+                                                 "host":  "{{baseURL}}",
+                                                 "path":  [
+                                                              "{{createdGistID}}",
+                                                              "star"
+                                                          ]
+                                             },
+                                     "description":  ""
+                                 },
+                     "response":  [
+
+                                  ]
+                 },
+                 {
+                     "name":  "Read: Is Gist Starred",
+                     "event":  [
+                                   {
+                                       "listen":  "test",
+                                       "script":  {
+                                                      "id":  "82e9928c-3124-4d3d-8306-5e3b1f45dfdd",
+                                                      "exec":  [
+                                                                   "tests[\"Status code is 404\"] = responseCode.code === 404;",
+                                                                   "tests[\"Response time is acceptable (1s)\"] = responseTime \u003c 1000;",
+                                                                   "tests[\"Content-Type header is set\"] = postman.getResponseHeader(\"Content-Type\");"
+                                                               ],
+                                                      "type":  "text/javascript"
+                                                  }
+                                   }
+                               ],
+                     "request":  {
+                                     "method":  "GET",
+                                     "header":  [
+
+                                                ],
+                                     "body":  {
+                                                  "raw":  "",
+                                                  "mode":  "raw"
+                                              },
+                                     "url":  {
+                                                 "raw":  "{{baseURL}}/{{createdGistID}}/star",
+                                                 "host":  "{{baseURL}}",
+                                                 "path":  [
+                                                              "{{createdGistID}}",
+                                                              "star"
+                                                          ]
+                                             },
+                                     "description":  ""
+                                 },
+                     "response":  [
+
+                                  ]
+                 },
+                 {
+                     "name":  "Delete Gist",
+                     "event":  [
+                                   {
+                                       "listen":  "test",
+                                       "script":  {
+                                                      "id":  "82e9928c-3124-4d3d-8306-5e3b1f45dfdd",
+                                                      "exec":  [
+                                                                   "tests[\"Status code is 204: No Content\"] = responseCode.code === 204;",
+                                                                   "tests[\"Response time is acceptable (1s)\"] = responseTime \u003c 1000;",
+                                                                   "tests[\"Content-Type header is set\"] = postman.getResponseHeader(\"Content-Type\");"
+                                                               ],
+                                                      "type":  "text/javascript"
+                                                  }
+                                   }
+                               ],
+                     "request":  {
+                                     "method":  "DELETE",
+                                     "header":  [
+
+                                                ],
+                                     "body":  {
+                                                  "raw":  "",
+                                                  "mode":  "raw"
+                                              },
+                                     "url":  {
+                                                 "raw":  "{{baseURL}}/{{createdGistID}}",
+                                                 "host":  "{{baseURL}}",
+                                                 "path":  [
+                                                              "{{createdGistID}}"
+                                                          ]
+                                             },
+                                     "description":  ""
+                                 },
+                     "response":  [
+
+                                  ]
+                 }
+             ],
+    "info":  {
+                 "name":  "JedQA",
+                 "schema":  "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+                 "_postman_id":  "1aa9caa0-6269-4c97-9dbd-0a98ee2afb4f"
+             },
+    "event":  [
+                  {
+                      "script":  {
+                                     "exec":  [
+
+                                              ],
+                                     "id":  "a2a45275-f810-474b-9ab8-4f9ec5ba4ef8",
+                                     "type":  "text/javascript"
+                                 },
+                      "listen":  "prerequest"
+                  },
+                  {
+                      "script":  {
+                                     "exec":  [
+
+                                              ],
+                                     "id":  "95862455-dcfd-4cd7-a31a-3a24b46cc92c",
+                                     "type":  "text/javascript"
+                                 },
+                      "listen":  "test"
+                  }
+              ],
+    "auth":  {
+                 "bearer":  [
+                                {
+                                    "key":  "token",
+                                    "type":  "string",
+                                    "value":  "4d6fe267abac6aa417e9f39b259e581356d53438"
+                                }
+                            ],
+                 "type":  "bearer"
+             }
+}

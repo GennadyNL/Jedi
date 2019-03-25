@@ -1,0 +1,57 @@
+Feature: Test Gists API
+
+  # The 1st request creates a new simple gist
+  Scenario: Create Gist
+	When User sends a create gist request with 1 file and arbitrary content
+	Then Response code is successful (201)
+	And Response time is acceptable (2s)
+	And Content-Type header is set
+
+  # The 2nd request reads gists list
+  Scenario: Read: Get Gist List
+	When User sends a read gist request
+	Then Response code is successful (200)
+	And Response time is acceptable (2s)
+	And Content-Type header is set
+
+  # The 3rd request reads starred gists list
+  Scenario: Read: Get Starred Gists
+	When User sends a read starred gist request
+	Then Response code is successful (200)
+	And Response time is acceptable (2s)
+	And Content-Type header is set
+
+  # The 4th request updates (stars) the created gist
+  Scenario: Update : Star Gist
+	When User sends an update (star) request
+	Then Response code is successful (204)
+	And Response time is acceptable (1s)
+	And Content-Type header is set
+
+  # The 5th request reads whether the created gist is starred
+  Scenario: Read: Is Gist Starred
+	When User sends isStarred gist request
+	Then Response code is successful (204)
+	And Response time is acceptable (1s)
+	And Content-Type header is set
+
+  # The 6th request update (unstars) the created gist
+  Scenario: Update: Unstar Gist
+	When User sends an update (unstar) request
+	Then Response code is successful (204)
+	And Response time is acceptable (1s)
+	And Content-Type header is set
+
+  # The 7th request reads whether the created gist is starred
+  Scenario: Read: Is Gist Starred
+	When User sends isStarred gist request
+	Then Response code is not found (404)
+	And Response time is acceptable (1s)
+	And Content-Type header is set
+
+  # The 8th request removes the created gist
+  Scenario: Delete Gist
+	When User sends a delete gist request
+	Then Response code is successful (204)
+	And Response time is acceptable (1s)
+	And Content-Type header is set
